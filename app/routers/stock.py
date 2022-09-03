@@ -30,6 +30,9 @@ def get_highest_price_for_stock(stock_name: str):
         return {'Highest': mqtt.edita_high}
     elif (stock_name == 'Hamada Inc'):
         return {'Highest': mqtt.hamada_high}
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"No such stock {stock_name}")
 
 
 @router.get('/lowest/{stock_name}', status_code=status.HTTP_200_OK)
@@ -40,6 +43,9 @@ def get_highest_price_for_stock(stock_name: str):
         return {'Lowest price': mqtt.edita_low}
     elif (stock_name == 'Hamada Inc'):
         return {'Lowest price': mqtt.hamada_low}
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"No such stock {stock_name}")
 
 
 @router.post("/buy", status_code=status.HTTP_200_OK)

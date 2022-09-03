@@ -36,16 +36,7 @@ async def message(client, topic, payload, qos, properties):
     # print("Received message: ", topic, payload.decode(), qos, properties)
     new_stock: dict = json.loads(
         payload.decode("utf-8").replace("'", '"'))
-    if (new_stock.get('name') == 'CIB'):
-        global cib_range
-        update_CIB_price_range(new_stock)
-        update_stocks_to_db(new_stock, 'CIB')
-    elif (new_stock.get('name') == 'Edita'):
-        update_Edita_price_range(new_stock)
-        update_stocks_to_db(new_stock, 'Edita')
-    elif (new_stock.get('name') == 'Hamada Inc'):
-        update_Hamada_price_range(new_stock)
-        update_stocks_to_db(new_stock, 'Hamada Inc')
+    stock_manipulation(new_stock)
 
 
 @mqtt.on_disconnect()
@@ -56,6 +47,18 @@ def disconnect(client, packet, exc=None):
 @mqtt.on_subscribe()
 def subscribe(client, mid, qos, properties):
     print("subscribed", client, mid, qos, properties)
+
+
+def stock_manipulation(new_stock: dict):
+    if (new_stock.get('name') == 'CIB'):
+        update_CIB_price_range(new_stock)
+        update_stocks_to_db(new_stock, 'CIB')
+    elif (new_stock.get('name') == 'Edita'):
+        update_Edita_price_range(new_stock)
+        update_stocks_to_db(new_stock, 'Edita')
+    elif (new_stock.get('name') == 'Hamada Inc'):
+        update_Hamada_price_range(new_stock)
+        update_stocks_to_db(new_stock, 'Hamada Inc')
 
 
 def update_stocks_to_db(new_stock: dict, stock_name: str):
