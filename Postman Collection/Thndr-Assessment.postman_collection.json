@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "2bd8db7a-4f8b-4a5f-8532-5e3335329920",
+		"name": "Thndr-Assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20914284"
+	},
+	"item": [
+		{
+			"name": "Main",
+			"item": [
+				{
+					"name": "Deposite",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"259313fb-64be-4d2a-9c56-e3c5e753b073\",\r\n    \"amount\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/users/deposite",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"deposite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"98b31f68-6746-4de7-93af-b1fdb5ad8c24\",\r\n    \"amount\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/users/withdraw",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"1e0c73e1-33d2-4826-83f3-fd3a1244a6b3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/users/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stock Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/stocks/stock/9baa1122-4894-4a88-822c-e6e5c5f3c520",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"stock",
+								"9baa1122-4894-4a88-822c-e6e5c5f3c520"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buy Stock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"88553e40-0a42-47c6-92e3-3ba4e0fa0946\",\r\n    \"stock_id\": \"95d00ca6-abac-4e8e-9611-9face11114a4\",\r\n    \"total\": 50,\r\n    \"upper_bound\": 50,\r\n    \"lower_bound\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/stocks/buy",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Stock Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/stocks/Edita",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"Edita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sell Stock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"259313fb-64be-4d2a-9c56-e3c5e753b073\",\r\n    \"stock_id\": \"b98183ea-8bd0-48e8-ae17-12a601927056\",\r\n    \"total\": 1000,\r\n    \"upper_bound\": 1000,\r\n    \"lower_bound\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/stocks/sell",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"sell"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Highest price for Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/stocks/highest/CIB",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"highest",
+								"CIB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lowest price for Stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/v1/stocks/lowest/CIB",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"stocks",
+								"lowest",
+								"CIB"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
