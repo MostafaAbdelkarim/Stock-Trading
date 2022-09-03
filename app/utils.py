@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from . import models
 from .models import Stock, User
 from .database import get_engine
 

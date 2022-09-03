@@ -1,8 +1,5 @@
-from datetime import datetime
 from typing import List
 from pydantic import BaseModel, EmailStr
-
-from app.database import Base
 
 
 class StockBase(BaseModel):

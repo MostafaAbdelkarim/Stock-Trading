@@ -1,6 +1,4 @@
-from configparser import RawConfigParser
 from fastapi import HTTPException, status, Depends, APIRouter
-
 from app import mqtt
 from .. import models, schemas, utils
 from ..database import get_db
@@ -67,7 +65,6 @@ def user_buy_stocks(user: schemas.UserStockTransactions, db: Session = Depends(g
     if found_user.amount < found_stock.price:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=f"User cannot afford this stock")
-    # change price condition later
     num_of_stocks = (user.total / found_stock.price)
     if (user.lower_bound < found_stock.price and user.upper_bound > found_stock.price):
         junction_query = db.query(models.UserStock).filter(
@@ -91,9 +88,9 @@ def user_buy_stocks(user: schemas.UserStockTransactions, db: Session = Depends(g
         user_query.update({'amount': found_user.amount},
                           synchronize_session=False)
         db.commit()
-        return {"Success": f"User: {found_user.first_name} bought {num_of_stocks} of Stock {found_stock.name} "}
-    else:
-        return {"Fail": f"Upper/Lower bounds does not match.. please retry"}
+        return {"Success": f"User: {found_user.first_name} bought {num_of_stocks} of Stock {found_stock.name}"}
+    raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail=f"Upper/Lower bound does not match")
 
 
 @router.post("/sell", status_code=status.HTTP_200_OK)
@@ -132,7 +129,8 @@ def get_stock_by_id(user: schemas.UserStockTransactions, db: Session = Depends(g
                           synchronize_session=False)
         db.commit()
         return {"Success": f"User {user_found.first_name} Sold {num_of_stocks} of Stock {stock_found.name}"}
-    return {"Fail": "Upper/Lower bound does not meet"}
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={
+                        "Fail": "Upper/Lower bound does not meet"})
 
 
 @router.get("/stock/{id}", status_code=status.HTTP_200_OK)
