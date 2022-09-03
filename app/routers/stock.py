@@ -1,5 +1,7 @@
 from configparser import RawConfigParser
 from fastapi import HTTPException, status, Depends, APIRouter
+
+from app import mqtt
 from .. import models, schemas, utils
 from ..database import get_db
 from sqlalchemy.orm import Session, joinedload
@@ -18,6 +20,26 @@ def get_current_stock_price(stock_name: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Stock with name: {stock_name} is not found")
     return stock_query.first()
+
+
+@router.get('/highest/{stock_name}', status_code=status.HTTP_200_OK)
+def get_highest_price_for_stock(stock_name: str):
+    if (stock_name == 'CIB'):
+        return {'Highest': mqtt.cib_high}
+    elif (stock_name == 'Edita'):
+        return {'Highest': mqtt.edita_high}
+    elif (stock_name == 'Hamada Inc'):
+        return {'Highest': mqtt.hamada_high}
+
+
+@router.get('/lowest/{stock_name}', status_code=status.HTTP_200_OK)
+def get_highest_price_for_stock(stock_name: str):
+    if (stock_name == 'CIB'):
+        return {'Lowest price': mqtt.cib_low}
+    elif (stock_name == 'Edita'):
+        return {'Lowest price': mqtt.edita_low}
+    elif (stock_name == 'Hamada Inc'):
+        return {'Lowest price': mqtt.hamada_low}
 
 
 @router.post("/buy", status_code=status.HTTP_200_OK)
