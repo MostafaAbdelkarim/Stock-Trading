@@ -22,12 +22,8 @@ def get_current_stock_price(stock_name: str, db: Session = Depends(get_db)):
 
 @router.get('/highest/{stock_name}', status_code=status.HTTP_200_OK)
 def get_highest_price_for_stock(stock_name: str):
-    if (stock_name == 'CIB'):
-        return {'Highest': mqtt.cib_high}
-    elif (stock_name == 'Edita'):
-        return {'Highest': mqtt.edita_high}
-    elif (stock_name == 'Hamada Inc'):
-        return {'Highest': mqtt.hamada_high}
+    if (stock_name in utils.stock_range):
+        return {'Highest': utils.stock_range[stock_name]['High']}
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"No such stock {stock_name}")
@@ -35,12 +31,8 @@ def get_highest_price_for_stock(stock_name: str):
 
 @router.get('/lowest/{stock_name}', status_code=status.HTTP_200_OK)
 def get_highest_price_for_stock(stock_name: str):
-    if (stock_name == 'CIB'):
-        return {'Lowest price': mqtt.cib_low}
-    elif (stock_name == 'Edita'):
-        return {'Lowest price': mqtt.edita_low}
-    elif (stock_name == 'Hamada Inc'):
-        return {'Lowest price': mqtt.hamada_low}
+    if (stock_name in utils.stock_range):
+        return {'Lowest': utils.stock_range[stock_name]['Low']}
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"No such stock {stock_name}")
